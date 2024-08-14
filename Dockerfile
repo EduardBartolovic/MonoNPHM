@@ -88,7 +88,6 @@ RUN cd src/mononphm/preprocessing && \
     cd metrical-tracker && \
     ./install.sh
 
-# WORKDIR /app/src/mononphm/preprocessing
 RUN cp src/mononphm/preprocessing/replacement_code/config.py src/mononphm/preprocessing/metrical-tracker/configs/config.py && \
     cp src/mononphm/preprocessing/replacement_code/generate_dataset.py src/mononphm/preprocessing/metrical-tracker/datasets/generate_dataset.py && \
     cp src/mononphm/preprocessing/replacement_code/tracker.py src/mononphm/preprocessing/metrical-tracker/tracker.py
@@ -106,9 +105,21 @@ RUN cd src/mononphm/preprocessing && \
 RUN cd src/mononphm/preprocessing && \
     git clone https://github.com/jhb86253817/PIPNet.git && \
     cd PIPNet/FaceBoxesV2/utils && \
-    sh make.sh && \
-    cd ../.. && \
-    mkdir snapshots
+    sh make.sh
+
+RUN pip install gdown
+
+RUN mkdir src/mononphm/preprocessing/PIPNet/snapshots && \
+    gdown https://drive.google.com/drive/folders/1Mc7iYzMTKSRSoo0sxpdzCeySO1x4Wf4y -O src/mononphm/preprocessing/PIPNet/snapshots/ --folder && \
+    cd src/mononphm/preprocessing/PIPNet/snapshots/WFLW
+
+RUN gdown https://drive.google.com/file/d/1Nf1ZxeJZJL8Qx9KadcYYyEmmlKhTADxX -O src/mononphm/preprocessing/MODNet/pretrained/
+
+RUN mkdir MONONPHM_EXPERIMENT_DIR && \
+    gdown https://drive.google.com/drive/folders/1shwQnL-TBI4vTsKVLOqyQ7B9rQcW9ozW -O MONONPHM_EXPERIMENT_DIR --folder
+
+# Add a VOLUME instruction to specify the external directory that will be mounted
+VOLUME ["/ffhq"]
 
 # Command to run the application within the Conda environment
-CMD ["conda", "run", "-n", "mononphm", "python", "main.py"]
+CMD ["conda", "run", "-n", "mononphm", "python", "scripts/inference/rec.py", "--model_type", "nphm", "--exp_name", "pretained_monnphm", "--ckpt", "2500", "--seq_name", "FFHQ_ID", "--no-intrinsics_provided", "--downsample_factor", "0.33"]

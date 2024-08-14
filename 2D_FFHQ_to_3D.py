@@ -4,17 +4,14 @@ from mononphm import env_paths
 
 
 def move_file_to_new_folder(input_dir, output_dir):
-    # Ensure the input directory exists
     if not os.path.exists(input_dir):
         print(f"The input directory {input_dir} does not exist.")
         return
 
-    # Ensure the output directory exists, if not create it
     os.makedirs(output_dir, exist_ok=True)
 
     # Iterate over all files in the input directory
     for file_name in os.listdir(input_dir):
-        # Full path of the input file
         input_file_path = os.path.join(input_dir, file_name)
 
         # Skip directories, we are only interested in files
@@ -29,7 +26,6 @@ def move_file_to_new_folder(input_dir, output_dir):
         new_folder_path_source = os.path.join(output_dir, new_folder_name, 'source')
 
         try:
-            # Create the new directory
             os.makedirs(new_folder_path, exist_ok=True)
             os.makedirs(new_folder_path_source, exist_ok=True)
 
@@ -55,10 +51,20 @@ def apply_mononphm(working_dir):
         os.system(f'python scripts/inference/rec.py --model_type nphm --exp_name pretrained_mononphm --ckpt 2500 --seq_name {dir_name} --no-intrinsics_provided --downsample_factor 0.33')
 
 
-############
-input_dir = "/home/duck/ffhq-dataset/images1024x1024/06000"
-MonoNPHM_dataset_tracking_dir = "/home/duck/MonoNPHM/dataset_tracking"
 
-move_file_to_new_folder(input_dir, MonoNPHM_dataset_tracking_dir)
-apply_pre_processing(MonoNPHM_dataset_tracking_dir)
-apply_mononphm(MonoNPHM_dataset_tracking_dir)
+if __name__ == "__main__":
+    # Parse command-line arguments
+    parser = argparse.ArgumentParser(description="Process input directory for MonoNPHM.")
+    parser.add_argument('input_dir', type=str, help="The input directory containing files to process.")
+    parser.add_argument('output_dir', type=str, help="The output directory where files will be processed.")
+
+    args = parser.parse_args()
+
+    # Use the provided arguments
+    input_dir = args.input_dir
+    output_dir = args.output_dir
+
+    # Execute the processing functions
+    move_file_to_new_folder(input_dir, output_dir)
+    apply_pre_processing(output_dir)
+    apply_mononphm(output_dir)
