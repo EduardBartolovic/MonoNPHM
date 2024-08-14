@@ -66,5 +66,6 @@ if __name__ == "__main__":
 
     # Execute the processing functions
     move_file_to_new_folder(input_dir, output_dir)
+    print('Moving files done!')
     apply_pre_processing(output_dir)
     apply_mononphm(output_dir)

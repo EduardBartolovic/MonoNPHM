@@ -118,8 +118,10 @@ RUN gdown https://drive.google.com/file/d/1Nf1ZxeJZJL8Qx9KadcYYyEmmlKhTADxX -O s
 RUN mkdir MONONPHM_EXPERIMENT_DIR && \
     gdown https://drive.google.com/drive/folders/1shwQnL-TBI4vTsKVLOqyQ7B9rQcW9ozW -O MONONPHM_EXPERIMENT_DIR --folder
 
+RUN mkdir dataset_tracking
+
 # Add a VOLUME instruction to specify the external directory that will be mounted
 VOLUME ["/ffhq"]
 
 # Command to run the application within the Conda environment
-CMD ["conda", "run", "-n", "mononphm", "python", "scripts/inference/rec.py", "--model_type", "nphm", "--exp_name", "pretained_monnphm", "--ckpt", "2500", "--seq_name", "FFHQ_ID", "--no-intrinsics_provided", "--downsample_factor", "0.33"]
+CMD ["conda", "run", "-n", "mononphm", "python", "2D_FFHQ_to_3D.py", "/ffhq/15000/", "dataset_tracking/" ]
