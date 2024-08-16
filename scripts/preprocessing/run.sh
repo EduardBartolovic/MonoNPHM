@@ -1,5 +1,8 @@
 #!/bin/bash
 echo $1
+echo $1
+echo $1
+echo $1
 python ./scripts/preprocessing/run_PIPNet.py --seq_name $1
 python ./scripts/preprocessing/run_facer.py --seq_name $1
 python ./scripts/preprocessing/run_matting_images.py --seq_name $1
