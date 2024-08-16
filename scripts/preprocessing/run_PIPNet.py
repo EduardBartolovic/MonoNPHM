@@ -13,7 +13,7 @@ import distinctipy
 import math
 
 from mononphm import env_paths
-sys.path.append(f'{env_paths.CODE_BASE}/src/mononphm/preprocessing/PIPNet/FaceBoxesV2/')
+sys.path.append('/app/src/mononphm/preprocessing/PIPNet/FaceBoxesV2/')
 from mononphm.preprocessing.pipnet_utils import face_detection, landmark_detection
 from mononphm.utils.print_utils import print_flashy
 
