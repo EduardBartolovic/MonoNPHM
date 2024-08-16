@@ -24,7 +24,7 @@ begin_frames: 0
 keyframes: [0]
 intrinsics_provided: {'true' if intrinsics_provided else 'false'}'''
 
-    config_pth = f"{env_paths.CODE_BASE}/src/mononphm/preprocessing/metrical-tracker/configs/actors/{seq_name}.yml"
+    config_pth = "/app/src/mononphm/preprocessing/metrical-tracker/configs/actors/{seq_name}.yml"
     with open(config_pth, "w") as text_file:
         text_file.write(config_contents)
 
@@ -33,7 +33,7 @@ intrinsics_provided: {'true' if intrinsics_provided else 'false'}'''
         print('Metrical tracking already present. SKIPPING!')
         return
 
-    os.system(f'cd {env_paths.CODE_BASE}/src/mononphm/preprocessing/metrical-tracker/; python tracker.py --cfg {config_pth}')
+    os.system(f'cd /app/src/mononphm/preprocessing/metrical-tracker/; python tracker.py --cfg {config_pth}')
 
     print_flashy(f'[EXITING - METRICAL TRACKER] @ {seq_name}')
 
