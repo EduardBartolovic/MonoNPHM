@@ -3,9 +3,8 @@ import tyro
 from mononphm import env_paths
 
 def main(seq_name : str):
-    MODNet_path = f'/{env_paths.CODE_BASE}/src/mononphm/preprocessing/MODNet/'
+    MODNet_path = f'/app/src/mononphm/preprocessing/MODNet/'
     image_folder = env_paths.DATA_TRACKING
-    #seq_name = 'simon_510_s4'
     output_folder = f'{image_folder}/{seq_name}/matting/'
     os.makedirs(output_folder, exist_ok=True)
 

@@ -76,5 +76,5 @@ if __name__ == "__main__":
     print('Moving files done!')
     apply_pre_processing(output_dir)
     print('apply_pre_processing done!')
-    apply_mononphm(output_dir)
-    print('apply_mononphm done!')
+    #apply_mononphm(output_dir)
+    #print('apply_mononphm done!')
