@@ -46,10 +46,10 @@ def prepare_data(timestep=None,
     }
 
     # load head pose from MICA tracking
-    try:
-        new_mica_pose = np.load(f'{env_paths.DATA_TRACKING}/{seq_name}/metrical_tracker/{seq_name}/checkpoint/{max(timestep - 1, 0):05d}_cam_params_opencv.npz') #TODO
-    except Exception as fehler:
-        new_mica_pose = np.load(f'{env_paths.DATA_TRACKING2}/s{seq_name[6:]}/checkpoint/{max(timestep - 1, 0):05d}_cam_params_opencv.npz')
+    #try:
+    new_mica_pose = np.load(f'{env_paths.DATA_TRACKING}/{seq_name}/metrical_tracker/{seq_name}/checkpoint/{max(timestep - 1, 0):05d}_cam_params_opencv.npz') #TODO
+    #except Exception as fehler:
+    #    new_mica_pose = np.load(f'{env_paths.DATA_TRACKING2}/s{seq_name[6:]}/checkpoint/{max(timestep - 1, 0):05d}_cam_params_opencv.npz')
 
     mica_pose = new_mica_pose
 
