@@ -47,7 +47,7 @@ def apply_pre_processing(working_dir):
             result = subprocess.run(['sh', './scripts/preprocessing/run.sh', f'{dir_name}', '--no-intrinsics_provided'], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
             print(result.returncode)
             print(result.stdout.decode('UTF-8'))
-            print(result.stderr)
+            print(result.stderr.decode('UTF-8'))
 
 
 def apply_mononphm(working_dir):
