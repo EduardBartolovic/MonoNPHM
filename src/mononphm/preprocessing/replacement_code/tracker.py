@@ -155,10 +155,10 @@ class Tracker(object):
             return False
         snaps = sorted(glob(self.checkpoint_folder + '/*.frame'))
         if len(snaps) == 0:
-            logger.info('Training from beginning...')
+            #logger.info('Training from beginning...')
             return False
         if len(snaps) == len(self.dataset):
-            logger.info('Training has finished...')
+            #logger.info('Training has finished...')
             exit(0)
 
         last_snap = snaps[idx]
@@ -190,7 +190,7 @@ class Tracker(object):
         self.image_size = torch.from_numpy(payload['img_size'])[None].to(self.device)
         self.setup_renderer()
 
-        logger.info(f'Snapshot loaded for frame {self.frame}')
+        #logger.info(f'Snapshot loaded for frame {self.frame}')
 
         return True
 
@@ -571,7 +571,7 @@ class Tracker(object):
                     best_loss = loss_color
                     self.update(optimizer.param_groups)
 
-        for log in logs: logger.info(log)
+        #for log in logs: logger.info(log)
 
     def checkpoint(self, batch, visualizations=[[View.GROUND_TRUTH, View.LANDMARKS, View.HEATMAP], [View.COLOR_OVERLAY, View.SHAPE_OVERLAY, View.SHAPE]], frame_dst='/video', save=True, dump_directly=False):
         batch = self.to_cuda(batch)
@@ -715,7 +715,7 @@ class Tracker(object):
         self.is_initializing = True
         keyframes = self.config.keyframes
         if len(keyframes) == 0:
-            logger.error('[ERROR] Keyframes are empty!')
+            #logger.error('[ERROR] Keyframes are empty!')
             exit(0)
         keyframes.insert(0, keyframes[0])
         for i, j in enumerate(keyframes):
