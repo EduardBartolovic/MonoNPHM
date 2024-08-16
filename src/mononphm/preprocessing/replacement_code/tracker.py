@@ -27,7 +27,7 @@ import torch.backends.cudnn as cudnn
 import torch.nn as nn
 import torch.nn.functional as F
 import trimesh
-from loguru import logger
+#from loguru import logger
 from pytorch3d.io import load_obj
 from pytorch3d.renderer import RasterizationSettings, PointLights, MeshRenderer, MeshRasterizer, TexturesVertex, SoftPhongShader, look_at_view_transform, PerspectiveCameras, BlendParams
 from pytorch3d.structures import Meshes
@@ -87,7 +87,7 @@ class Tracker(object):
 
 
 
-        logger.add(os.path.join(self.config.save_folder, self.actor_name, 'train.log'))
+        #logger.add(os.path.join(self.config.save_folder, self.actor_name, 'train.log'))
 
         # Latter will be set up
         self.frame = 0
