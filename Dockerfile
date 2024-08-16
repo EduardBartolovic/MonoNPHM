@@ -74,19 +74,55 @@ ARG FLAME_USERNAME
 ARG FLAME_PASSWORD
 
 # Export the build arguments as environment variables and run the install script
-ENV FLAME_USERNAME=${FLAME_USERNAME}
-ENV FLAME_PASSWORD=${FLAME_PASSWORD}
 RUN cd src/mononphm/preprocessing && \
     git clone https://github.com/Zielon/MICA && \
     cd MICA && \
-    ./install.sh && \
-    cd ..
+    conda env create -f environment.yml
+
+RUN pip install gdown
+
+#wget --post-data "username=${ENCODED_USERNAME}&password=${ENCODED_PASSWORD}" 'https://download.is.tue.mpg.de/download.php?domain=flame&sfile=FLAME2020.zip&resume=1' -O './FLAME2020.zip' --no-check-certificate --continue && \
+RUN cd src/mononphm/preprocessing && \
+    mkdir -p data && \
+    gdown https://drive.google.com/drive/folders/1xFDmNxvsGc2eYlMDvAaybaLVFfM2WCqd -O data/ --folder && \
+    cd data/FLAME2020 && \
+    unzip FLAME2020.zip -d ./ && \
+    rm -rf FLAME2020.zip && \
+    cd .. && \
+    mkdir -p pretrained/ && \
+    wget -O pretrained/mica.tar "https://keeper.mpdl.mpg.de/f/db172dc4bd4f4c0f96de/?dl=1" && \
+    mkdir -p ~/.insightface/models/  && \
+    wget -O ~/.insightface/models/antelopev2.zip "https://keeper.mpdl.mpg.de/f/2d58b7fed5a74cb5be83/?dl=1"  && \
+    unzip ~/.insightface/models/antelopev2.zip -d ~/.insightface/models/antelopev2 && \
+    wget -O ~/.insightface/models/buffalo_l.zip "https://keeper.mpdl.mpg.de/f/8faabd353cfc457fa5c5/?dl=1" && \
+    unzip ~/.insightface/models/buffalo_l.zip -d ~/.insightface/models/buffalo_l
 
 # Install metrical tracker and replace files
 RUN cd src/mononphm/preprocessing && \
     git clone https://github.com/Zielon/metrical-tracker && \
     cd metrical-tracker && \
-    ./install.sh
+    conda env create -f environment.yml
+
+RUN cd src/mononphm/preprocessing/metrical-tracker && \
+    mkdir -p data && \
+    gdown https://drive.google.com/drive/folders/1xFDmNxvsGc2eYlMDvAaybaLVFfM2WCqd -O data/ --folder && \
+    cd data/FLAME2020 && \
+    unzip FLAME2020.zip -d ./ && \
+    rm -rf FLAME2020.zip && \
+    cd .. && \
+    gdown https://drive.google.com/drive/folders/1a477MNKEuOXeZL5GwTj6utDv89FpnvqP -O ./ --folder && \
+    cd TextureSpace && \
+    unzip -o TextureSpace.zip -d ./../FLAME2020/ && \
+    rm -rf TextureSpace.zip && \
+    cd .. && \
+    wget 'https://files.is.tue.mpg.de/tbolkart/FLAME/FLAME_masks.zip' -O './FLAME_masks.zip' --no-check-certificate --continue && \
+    unzip -o FLAME_masks.zip -d FLAME2020/ && \
+    rm -rf FLAME_masks.zip && \
+    wget -O mesh.zip "https://keeper.mpdl.mpg.de/f/f158a430ef754edba5ec/?dl=1" && \
+    unzip -o mesh.zip -d ./ && \
+    mv ./mesh/* ./ && \
+    rm -rf ./mesh && \
+    rm -rf mesh.zip
 
 RUN cp src/mononphm/preprocessing/replacement_code/config.py src/mononphm/preprocessing/metrical-tracker/configs/config.py && \
     cp src/mononphm/preprocessing/replacement_code/generate_dataset.py src/mononphm/preprocessing/metrical-tracker/datasets/generate_dataset.py && \
@@ -107,8 +143,6 @@ RUN cd src/mononphm/preprocessing && \
     cd PIPNet/FaceBoxesV2/utils && \
     sh make.sh
 
-RUN pip install gdown
-
 RUN mkdir src/mononphm/preprocessing/PIPNet/snapshots && \
     gdown https://drive.google.com/drive/folders/1Mc7iYzMTKSRSoo0sxpdzCeySO1x4Wf4y -O src/mononphm/preprocessing/PIPNet/snapshots/ --folder && \
     cd src/mononphm/preprocessing/PIPNet/snapshots/WFLW
@@ -124,4 +158,5 @@ RUN mkdir dataset_tracking
 VOLUME ["/ffhq"]
 
 # Command to run the application within the Conda environment
-CMD ["conda", "run", "-n", "mononphm", "python", "2D_FFHQ_to_3D.py", "/ffhq/15000/", "dataset_tracking/" ]
+CMD [ "bash" ]
+#CMD ["conda", "run", "-n", "mononphm", "python", "2D_FFHQ_to_3D.py", "/ffhq/15000/", "dataset_tracking/" ]
