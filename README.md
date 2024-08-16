@@ -22,6 +22,12 @@ This repository contains the official implementation of the paper:
 
 ## 1. Installation
 
+### 
+```
+conda env create -f environment.yml   
+conda activate mononphm
+```
+
 ### 1.1 Dependencies
 
 a) Setup a conda environment and activate it via
