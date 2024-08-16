@@ -43,15 +43,17 @@ def move_file_to_new_folder(input_dir, output_dir):
 def apply_pre_processing(working_dir):
     for dir_name in os.listdir(working_dir):
         print(dir_name)
-        result = subprocess.run(['sh', './scripts/preprocessing/run.sh', f'{dir_name}', '--no-intrinsics_provided'], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-        print(result.returncode, result.stdout, result.stderr)
+        if dir_name != 'MICA_input':
+            result = subprocess.run(['sh', './scripts/preprocessing/run.sh', f'{dir_name}', '--no-intrinsics_provided'], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+            print(result.returncode, result.stdout, result.stderr)
 
 
 def apply_mononphm(working_dir):
     for dir_name in os.listdir(working_dir):
         print(dir_name)
-        os.system(f'python scripts/inference/rec.py --model_type nphm --exp_name pretained_monnphm --ckpt 2500 --seq_name {dir_name} --no-intrinsics_provided --downsample_factor 0.33')
-        # pretained_monnphm is correct because of spelling error in googledrive files.
+        if dir_name != 'MICA_input':
+            os.system(f'python scripts/inference/rec.py --model_type nphm --exp_name pretained_monnphm --ckpt 2500 --seq_name {dir_name} --no-intrinsics_provided --downsample_factor 0.33')
+            # pretained_monnphm is correct because of spelling error in googledrive files.
 
 
 
