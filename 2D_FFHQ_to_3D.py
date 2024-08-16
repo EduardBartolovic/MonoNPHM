@@ -42,7 +42,7 @@ def move_file_to_new_folder(input_dir, output_dir):
 def apply_pre_processing(working_dir):
     for dir_name in os.listdir(working_dir):
         print(dir_name)
-        os.system(f'cd {env_paths.CODE_BASE}/scripts/preprocessing/; bash run.sh {dir_name} --no-intrinsics_provided')
+        os.system(f'bash scripts\preprocessing\run.sh {dir_name} --no-intrinsics_provided')
 
 
 def apply_mononphm(working_dir):
@@ -69,4 +69,6 @@ if __name__ == "__main__":
     move_file_to_new_folder(input_dir, output_dir)
     print('Moving files done!')
     apply_pre_processing(output_dir)
+    print('apply_pre_processing done!')
     apply_mononphm(output_dir)
+    print('apply_mononphm done!')
