@@ -24,8 +24,7 @@ This repository contains the official implementation of the paper:
 
 ### 
 ```
-conda env create -f environment.yml   
-conda activate mononphm
+sudo docker build --build-arg FLAME_USERNAME=<USER> --build-arg FLAME_PASSWORD=<PW> -t mononphm .
 ```
 
 ### 1.1 Dependencies
