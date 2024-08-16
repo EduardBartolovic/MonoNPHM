@@ -24,7 +24,7 @@ begin_frames: 0
 keyframes: [0]
 intrinsics_provided: {'true' if intrinsics_provided else 'false'}'''
 
-    config_pth = "/app/src/mononphm/preprocessing/metrical-tracker/configs/actors/{seq_name}.yml"
+    config_pth = f"/app/src/mononphm/preprocessing/metrical-tracker/configs/actors/{seq_name}.yml"
     with open(config_pth, "w") as text_file:
         text_file.write(config_contents)
 
