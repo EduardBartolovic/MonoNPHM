@@ -43,8 +43,8 @@ def move_file_to_new_folder(input_dir, output_dir):
 def apply_pre_processing(working_dir):
     for dir_name in os.listdir(working_dir):
         print(dir_name)
-        result = subprocess.call(['sh', '.\scripts\preprocessing\run.sh', f'{dir_name}', '--no-intrinsics_provided'], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-        print(result, result.stdout, result.stderr)
+        result = subprocess.run(['sh', '.\scripts\preprocessing\run.sh', f'{dir_name}', '--no-intrinsics_provided'], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        print(result.returncode, result.stdout, result.stderr)
 
 
 def apply_mononphm(working_dir):
