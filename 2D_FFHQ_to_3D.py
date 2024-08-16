@@ -48,7 +48,8 @@ def apply_pre_processing(working_dir):
 def apply_mononphm(working_dir):
     for dir_name in os.listdir(working_dir):
         print(dir_name)
-        os.system(f'python scripts/inference/rec.py --model_type nphm --exp_name pretained_mononphm --ckpt 2500 --seq_name {dir_name} --no-intrinsics_provided --downsample_factor 0.33')
+        os.system(f'python scripts/inference/rec.py --model_type nphm --exp_name pretained_monnphm --ckpt 2500 --seq_name {dir_name} --no-intrinsics_provided --downsample_factor 0.33')
+        # pretained_monnphm is correct because of spelling error in googledrive files.
 
 
 
