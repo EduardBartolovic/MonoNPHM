@@ -2,6 +2,7 @@ import os
 import shutil
 from mononphm import env_paths
 import argparse
+import subprocess
 
 def move_file_to_new_folder(input_dir, output_dir):
     if not os.path.exists(input_dir):
@@ -42,7 +43,7 @@ def move_file_to_new_folder(input_dir, output_dir):
 def apply_pre_processing(working_dir):
     for dir_name in os.listdir(working_dir):
         print(dir_name)
-        os.system(f'bash scripts\preprocessing\run.sh {dir_name} --no-intrinsics_provided')
+        subprocess.call(['sh', '.\scripts\preprocessing\run.sh', f'{dir_name}', '--no-intrinsics_provided'])
 
 
 def apply_mononphm(working_dir):
