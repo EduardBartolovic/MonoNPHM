@@ -62,6 +62,8 @@ RUN pip uninstall -y numpy && \
 # Install a specific version of PyOpenGL
 RUN pip install pyopengl==3.1.5
 
+RUN pip install gdown
+
 # Install the package in editable mode
 RUN pip install -e .
 
@@ -77,12 +79,7 @@ ARG FLAME_PASSWORD
 RUN cd src/mononphm/preprocessing && \
     git clone https://github.com/Zielon/MICA && \
     cd MICA && \
-    conda env create -f environment.yml
-
-RUN pip install gdown
-
-#wget --post-data "username=${ENCODED_USERNAME}&password=${ENCODED_PASSWORD}" 'https://download.is.tue.mpg.de/download.php?domain=flame&sfile=FLAME2020.zip&resume=1' -O './FLAME2020.zip' --no-check-certificate --continue && \
-RUN cd src/mononphm/preprocessing && \
+    conda env create -f environment.yml && \
     mkdir -p data && \
     gdown https://drive.google.com/drive/folders/1xFDmNxvsGc2eYlMDvAaybaLVFfM2WCqd -O data/ --folder && \
     cd data/FLAME2020 && \
@@ -101,9 +98,7 @@ RUN cd src/mononphm/preprocessing && \
 RUN cd src/mononphm/preprocessing && \
     git clone https://github.com/Zielon/metrical-tracker && \
     cd metrical-tracker && \
-    conda env create -f environment.yml
-
-RUN cd src/mononphm/preprocessing/metrical-tracker && \
+    conda env create -f environment.yml && \
     mkdir -p data && \
     gdown https://drive.google.com/drive/folders/1xFDmNxvsGc2eYlMDvAaybaLVFfM2WCqd -O data/ --folder && \
     cd data/FLAME2020 && \
