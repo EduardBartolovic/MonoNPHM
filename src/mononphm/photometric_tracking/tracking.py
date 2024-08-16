@@ -1215,9 +1215,9 @@ class Tracker:
             mesh.visual.vertex_colors = vertex_color
             if self.fine_tune_id:
                 os.makedirs(self.exp_dir + f'/{actual_expression:05d}/', exist_ok=True)
-                mesh.export(self.exp_dir + f'/{actual_expression:05d}/mesh.ply')
+                mesh.export(self.exp_dir + f'/{actual_expression:05d}/mesh.obj')
             else:
-                mesh.export(self.exp_dir + 'mesh.ply'.format(self.subject, actual_expression))
+                mesh.export(self.exp_dir + 'mesh.obj'.format(self.subject, actual_expression))
             torch.cuda.empty_cache()
 
         if progress_interval > 0:

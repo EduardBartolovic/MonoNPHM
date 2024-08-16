@@ -142,7 +142,8 @@ RUN mkdir src/mononphm/preprocessing/PIPNet/snapshots && \
     gdown https://drive.google.com/drive/folders/1Mc7iYzMTKSRSoo0sxpdzCeySO1x4Wf4y -O src/mononphm/preprocessing/PIPNet/snapshots/ --folder && \
     cd src/mononphm/preprocessing/PIPNet/snapshots/WFLW
 
-RUN gdown https://drive.google.com/file/d/1Nf1ZxeJZJL8Qx9KadcYYyEmmlKhTADxX -O src/mononphm/preprocessing/MODNet/pretrained/
+RUN gdown https://drive.google.com/drive/folders/1umYmlCulvIFNaqPjwod1SayFmSRHziyR -O src/mononphm/preprocessing/MODNet/pretrained/ --folder && \
+    mv src/mononphm/preprocessing/MODNet/pretrained/PretrainedModels/* src/mononphm/preprocessing/MODNet/pretrained/
 
 RUN mkdir MONONPHM_EXPERIMENT_DIR && \
     gdown https://drive.google.com/drive/folders/1shwQnL-TBI4vTsKVLOqyQ7B9rQcW9ozW -O MONONPHM_EXPERIMENT_DIR --folder
@@ -151,7 +152,8 @@ RUN mkdir dataset_tracking
 
 # Add a VOLUME instruction to specify the external directory that will be mounted
 VOLUME ["/ffhq"]
+VOLUME ["/mono_output"]
 
 # Command to run the application within the Conda environment
-CMD [ "bash" ]
-#CMD ["conda", "run", "-n", "mononphm", "python", "2D_FFHQ_to_3D.py", "/ffhq/15000/", "dataset_tracking/" ]
+#CMD [ "bash" ]
+CMD ["conda", "run", "-n", "mononphm", "python", "2D_FFHQ_to_3D.py", "/ffhq/15000/", "dataset_tracking/" ]
