@@ -60,7 +60,7 @@ if __name__ == "__main__":
     # Parse command-line arguments
     parser = argparse.ArgumentParser(description="Process input directory for MonoNPHM.")
     parser.add_argument('input_dir', type=str, help="The input directory containing files to process.")
-    parser.add_argument('output_dir', type=str, help="The output directory where files will be processed.")
+    parser.add_argument('working_dir', type=str, help="The output directory where files will be processed.")
 
     args = parser.parse_args()
 
