@@ -76,6 +76,7 @@ if __name__ == "__main__":
     # Execute the processing functions
     move_file_to_new_folder(input_dir, working_dir)
     print('Moving files done!')
+    print(dirs)
     dirs = os.listdir(working_dir).sort()
     print(dirs)
     for i in dirs:
