@@ -39,6 +39,7 @@ def move_file_to_new_folder(input_dir, output_dir):
 
         except Exception as e:
             print(f"An error occurred while processing {file_name}: {e}")
+            raise AttributeError(f"An error occurred while processing {file_name}: {e}")
 
     return files
 
@@ -57,6 +58,10 @@ def apply_mononphm(dir_name):
 
 
 if __name__ == "__main__":
+
+    if not torch.cuda.is_available():
+        raise AttributeError("torch.cuda.is_available() is False")
+
     # Parse command-line arguments
     parser = argparse.ArgumentParser(description="Process input directory for MonoNPHM.")
     parser.add_argument('input_dir', type=str, help="The input directory containing files to process.")
@@ -70,9 +75,9 @@ if __name__ == "__main__":
     # Execute the processing functions
     move_file_to_new_folder(input_dir, working_dir)
     print('Moving files done!')
-    dirs = os.listdir(working_dir)#.sort()
+    dirs = os.listdir(working_dir).sort()
     print(dirs)
-    for i in dirs[0]:
+    for i in dirs:
         apply_pre_processing(os.path.join(working_dir, i))
         print('apply_pre_processing done!')
         apply_mononphm(os.path.join(working_dir, i))
