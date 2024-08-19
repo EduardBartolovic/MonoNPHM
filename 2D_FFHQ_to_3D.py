@@ -77,6 +77,7 @@ if __name__ == "__main__":
     move_file_to_new_folder(input_dir, working_dir)
     print('Moving files done!')
     dirs = os.listdir(working_dir)
+    dirs.sort()
     print(dirs)
     for i in dirs:
         apply_pre_processing(i)

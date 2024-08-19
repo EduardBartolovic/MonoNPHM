@@ -29,7 +29,7 @@ sudo docker build -t mononphm .
 
 ### 
 ```
-sudo docker run -it -e MONONPHM_CODE_BASE='/app/' -e MONONPHM_TRAINING_SUPERVISION="." -e MONONPHM_DATA="/app/dataset" -e MONONPHM_EXPERIMENT_DIR="/app/MONONPHM_EXPERIMENT_DIR" -e MONONPHM_DATA_TRACKING="/app/dataset_tracking" -e MONONPHM_TRACKING_OUTPUT="/mono_output" -v ~/ffhq/:/ffhq/ --gpus all mononphm
+sudo docker run -it -e MONONPHM_CODE_BASE='/app/' -e MONONPHM_TRAINING_SUPERVISION="." -e MONONPHM_DATA="/app/dataset" -e MONONPHM_EXPERIMENT_DIR="/app/MONONPHM_EXPERIMENT_DIR" -e MONONPHM_DATA_TRACKING="/app/mono_tracking" -e MONONPHM_TRACKING_OUTPUT="mono_output" -v ~/ffhq/:/ffhq/ -v ~/mono_output/:/app/mono_output/ --gpus all mononphm
 ```
 
 

@@ -156,4 +156,4 @@ VOLUME ["/mono_output"]
 
 # Command to run the application within the Conda environment
 #CMD [ "bash" ]
-CMD ["conda", "run", "-n", "mononphm", "python", "2D_FFHQ_to_3D.py", "/ffhq/15000/", "dataset_tracking/" ]
+CMD ["conda", "run", "-n", "mononphm", "python", "2D_FFHQ_to_3D.py", "/ffhq/15000/", "mono_tracking/" ]
