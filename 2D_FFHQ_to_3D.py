@@ -12,7 +12,8 @@ def move_file_to_new_folder(input_dir, output_dir):
     os.makedirs(output_dir, exist_ok=True)
 
     # Iterate over all files in the input directory
-    for file_name in os.listdir(input_dir):
+    files = os.listdir(input_dir)
+    for file_name in files:
         input_file_path = os.path.join(input_dir, file_name)
 
         # Skip directories, we are only interested in files
@@ -39,22 +40,18 @@ def move_file_to_new_folder(input_dir, output_dir):
         except Exception as e:
             print(f"An error occurred while processing {file_name}: {e}")
 
-
-def apply_pre_processing(working_dir):
-    for dir_name in os.listdir(working_dir):
-        if dir_name != 'MICA_input':
-            print(dir_name)
-            result = subprocess.run(['sh', './scripts/preprocessing/run.sh', dir_name , '--no-intrinsics_provided'], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-            print(result.returncode)
-            print(result.stdout.decode('UTF-8'))
-            print(result.stderr.decode('UTF-8'))
+    return files
 
 
-def apply_mononphm(working_dir):
-    for dir_name in os.listdir(working_dir):
-        if dir_name != 'MICA_input':
-            print(dir_name)
-            os.system(f'python scripts/inference/rec.py --model_type nphm --exp_name pretained_monnphm --ckpt 2500 --seq_name {dir_name} --no-intrinsics_provided --downsample_factor 0.33')
+def apply_pre_processing(dir_name):
+        result = subprocess.run(['sh', './scripts/preprocessing/run.sh', dir_name , '--no-intrinsics_provided'], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        print(result.returncode)
+        print(result.stdout.decode('UTF-8'))
+        print(result.stderr.decode('UTF-8'))
+
+
+def apply_mononphm(dir_name):
+    os.system(f'python scripts/inference/rec.py --model_type nphm --exp_name pretained_monnphm --ckpt 2500 --seq_name {dir_name} --no-intrinsics_provided --downsample_factor 0.33')
             # pretained_monnphm is correct because of spelling error in googledrive files.
 
 
@@ -69,12 +66,13 @@ if __name__ == "__main__":
 
     # Use the provided arguments
     input_dir = args.input_dir
-    output_dir = args.output_dir
+    working_dir = args.working_dir
 
     # Execute the processing functions
-    move_file_to_new_folder(input_dir, output_dir)
+    dirs = move_file_to_new_folder(input_dir, working_dir)
     print('Moving files done!')
-    apply_pre_processing(output_dir)
-    print('apply_pre_processing done!')
-    apply_mononphm(output_dir)
-    print('apply_mononphm done!')
+    for i in dirs:
+        apply_pre_processing(os.path.join(working_dir, i))
+        print('apply_pre_processing done!')
+        apply_mononphm(os.path.join(working_dir, i))
+        print('apply_mononphm done!')

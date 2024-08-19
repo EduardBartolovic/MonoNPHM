@@ -24,8 +24,14 @@ This repository contains the official implementation of the paper:
 
 ### 
 ```
-sudo docker build --build-arg FLAME_USERNAME=<USER> --build-arg FLAME_PASSWORD=<PW> -t mononphm .
+sudo docker build -t mononphm .
 ```
+
+### 
+```
+sudo docker run -it -e MONONPHM_CODE_BASE='/app/' -e MONONPHM_TRAINING_SUPERVISION="." -e MONONPHM_DATA="/app/dataset" -e MONONPHM_EXPERIMENT_DIR="/app/MONONPHM_EXPERIMENT_DIR" -e MONONPHM_DATA_TRACKING="/app/dataset_tracking" -e MONONPHM_TRACKING_OUTPUT="/mono_output" -v ~/ffhq/:/ffhq/ --gpus all mononphm
+```
+
 
 ### 1.1 Dependencies
 
