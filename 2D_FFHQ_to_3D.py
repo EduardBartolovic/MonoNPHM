@@ -72,7 +72,7 @@ if __name__ == "__main__":
     print('Moving files done!')
     dirs = os.listdir(working_dir)#.sort()
     print(dirs)
-    for i in dirs:
+    for i in dirs[0]:
         apply_pre_processing(os.path.join(working_dir, i))
         print('apply_pre_processing done!')
         apply_mononphm(os.path.join(working_dir, i))
