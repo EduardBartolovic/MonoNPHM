@@ -67,11 +67,11 @@ if __name__ == "__main__":
     # Use the provided arguments
     input_dir = args.input_dir
     working_dir = args.working_dir
-
     # Execute the processing functions
-    dirs = move_file_to_new_folder(input_dir, working_dir)
-    print(dirs)
+    #move_file_to_new_folder(input_dir, working_dir)
     print('Moving files done!')
+    dirs = os.listdir(working_dir)
+    print(dirs)
     #for i in dirs:
     #    apply_pre_processing(os.path.join(working_dir, i))
     #    print('apply_pre_processing done!')
