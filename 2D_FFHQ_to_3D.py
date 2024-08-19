@@ -52,7 +52,7 @@ def apply_pre_processing(dir_name):
 
 def apply_mononphm(dir_name):
     os.system(f'python scripts/inference/rec.py --model_type nphm --exp_name pretained_monnphm --ckpt 2500 --seq_name {dir_name} --no-intrinsics_provided --downsample_factor 0.33')
-            # pretained_monnphm is correct because of spelling error in googledrive files.
+    # pretained_monnphm is correct because of spelling error in googledrive files.
 
 
 
@@ -70,9 +70,10 @@ if __name__ == "__main__":
 
     # Execute the processing functions
     dirs = move_file_to_new_folder(input_dir, working_dir)
+    print(dirs)
     print('Moving files done!')
-    for i in dirs:
-        apply_pre_processing(os.path.join(working_dir, i))
-        print('apply_pre_processing done!')
-        apply_mononphm(os.path.join(working_dir, i))
-        print('apply_mononphm done!')
+    #for i in dirs:
+    #    apply_pre_processing(os.path.join(working_dir, i))
+    #    print('apply_pre_processing done!')
+    #    apply_mononphm(os.path.join(working_dir, i))
+    #    print('apply_mononphm done!')
