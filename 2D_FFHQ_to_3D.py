@@ -70,7 +70,7 @@ if __name__ == "__main__":
     # Execute the processing functions
     #move_file_to_new_folder(input_dir, working_dir)
     print('Moving files done!')
-    dirs = sort(os.listdir(working_dir))
+    dirs = os.listdir(working_dir).sort()
     print(dirs)
     for i in dirs:
         apply_pre_processing(os.path.join(working_dir, i))
