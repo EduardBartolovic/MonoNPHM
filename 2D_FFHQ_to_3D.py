@@ -3,6 +3,7 @@ import shutil
 from mononphm import env_paths
 import argparse
 import subprocess
+import torch
 
 def move_file_to_new_folder(input_dir, output_dir):
     if not os.path.exists(input_dir):
