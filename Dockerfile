@@ -81,7 +81,7 @@ RUN cd src/mononphm/preprocessing && \
     cd MICA && \
     conda env create -f environment.yml && \
     mkdir -p data && \
-    gdown https://drive.google.com/drive/folders/1xFDmNxvsGc2eYlMDvAaybaLVFfM2WCqd -O data/ --folder && \
+    gdown https://drive.google.com/drive/folders/1f-2HYWT3DUWrT5RMsaOmq6NvTYfDVhrm -O data/ --folder && \
     cd data/FLAME2020 && \
     unzip FLAME2020.zip -d ./ && \
     rm -rf FLAME2020.zip && \
@@ -98,14 +98,15 @@ RUN cd src/mononphm/preprocessing && \
 RUN cd src/mononphm/preprocessing && \
     git clone https://github.com/Zielon/metrical-tracker && \
     cd metrical-tracker && \
+    sed -i 's/mediapipe==0.10.0/mediapipe==0.10.5/' environment.yml && \
     conda env create -f environment.yml && \
     mkdir -p data && \
-    gdown https://drive.google.com/drive/folders/1xFDmNxvsGc2eYlMDvAaybaLVFfM2WCqd -O data/ --folder && \
+    gdown https://drive.google.com/drive/folders/1f-2HYWT3DUWrT5RMsaOmq6NvTYfDVhrm -O data/ --folder && \
     cd data/FLAME2020 && \
     unzip FLAME2020.zip -d ./ && \
     rm -rf FLAME2020.zip && \
     cd .. && \
-    gdown https://drive.google.com/drive/folders/1a477MNKEuOXeZL5GwTj6utDv89FpnvqP -O ./ --folder && \
+    gdown https://drive.google.com/drive/folders/1MrMVvrdPofQ8XevYyCFEHKTif0MyoK4i -O ./ --folder && \
     cd TextureSpace && \
     unzip -o TextureSpace.zip -d ./../FLAME2020/ && \
     rm -rf TextureSpace.zip && \
